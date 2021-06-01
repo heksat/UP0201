@@ -16,17 +16,23 @@ using System.Windows.Shapes;
 namespace UP0201.Pages
 {
     /// <summary>
-    /// Interaction logic for Auth.xaml
+    /// Логика взаимодействия для Menu.xaml
     /// </summary>
-    public partial class Auth : Page
+    public partial class MainMenu : Page
     {
-        public Auth()
+        public MainMenu()
         {
             InitializeComponent();
-            using (var db = new DBContext()) {
-                ads.ItemsSource = db.Arenda.ToList();
-            }
-            
+        }
+
+        private void SpisTC_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new CollectionTC());
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //
         }
     }
 }

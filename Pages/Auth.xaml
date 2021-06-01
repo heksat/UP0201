@@ -9,7 +9,6 @@
       Title="Auth">
 
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="558,209,0,0" VerticalAlignment="Top" Width="75"/>
-        <DataGrid x:Name="ads"></DataGrid>
+        <DataGrid x:Name="ads" Margin="0,80,224,101.6"></DataGrid>
     </Grid>
 </Page>
