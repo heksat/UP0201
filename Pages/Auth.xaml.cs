@@ -64,6 +64,7 @@ namespace UP0201.Pages
                 Password.Password = String.Empty;
                 CapchaUser.Text = String.Empty;
             }
+            
         }
         private void GenerationCapcha()
         {
