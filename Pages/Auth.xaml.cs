@@ -23,6 +23,9 @@ namespace UP0201.Pages
         public Auth()
         {
             InitializeComponent();
+            using (var db = new DBContext()) {
+                ads.ItemsSource = db.Arenda.ToList();
+            }
         }
     }
 }

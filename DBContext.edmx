@@ -1,0 +1,390 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TorgovieCentriModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Arenda">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ID_arendatory" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="ID_EMP" Type="int" />
+          <Property Name="NumberOfPavil" Type="nvarchar" MaxLength="4" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="Start_rent" Type="datetime" />
+          <Property Name="Finisth_rent" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Arendatory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Id_arend" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nchar" MaxLength="17" />
+          <Property Name="Address" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Employers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Lname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Fname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" />
+          <Property Name="Pass" Type="nvarchar" MaxLength="50" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nchar" MaxLength="17" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="1" />
+          <Property Name="Photo" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Pavils">
+          <Key>
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="NumberOfPavil" />
+            <PropertyRef Name="Stage" />
+          </Key>
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NumberOfPavil" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="Stage" Type="int" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="Area" Type="float" />
+          <Property Name="PriceForMetr" Type="float" />
+          <Property Name="Koef" Type="float" />
+        </EntityType>
+        <EntityType Name="TC">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="CountPavil" Type="int" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="Price" Type="float" />
+          <Property Name="Koef" Type="float" />
+          <Property Name="Stages" Type="int" />
+          <Property Name="Image" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_Arenda_Arendatory">
+          <End Role="Arendatory" Type="Self.Arendatory" Multiplicity="0..1" />
+          <End Role="Arenda" Type="Self.Arenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Arendatory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Arenda">
+              <PropertyRef Name="ID_arendatory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Arenda_Employers">
+          <End Role="Employers" Type="Self.Employers" Multiplicity="0..1" />
+          <End Role="Arenda" Type="Self.Arenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Arenda">
+              <PropertyRef Name="ID_EMP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Arenda_TC">
+          <End Role="TC" Type="Self.TC" Multiplicity="0..1" />
+          <End Role="Arenda" Type="Self.Arenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TC">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="Arenda">
+              <PropertyRef Name="Name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pavils_TC">
+          <End Role="TC" Type="Self.TC" Multiplicity="1" />
+          <End Role="Pavils" Type="Self.Pavils" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TC">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="Pavils">
+              <PropertyRef Name="Name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TorgovieCentriModelStoreContainer">
+          <EntitySet Name="Arenda" EntityType="Self.Arenda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Arendatory" EntityType="Self.Arendatory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employers" EntityType="Self.Employers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pavils" EntityType="Self.Pavils" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TC" EntityType="Self.TC" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Arenda_Arendatory" Association="Self.FK_Arenda_Arendatory">
+            <End Role="Arendatory" EntitySet="Arendatory" />
+            <End Role="Arenda" EntitySet="Arenda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Arenda_Employers" Association="Self.FK_Arenda_Employers">
+            <End Role="Employers" EntitySet="Employers" />
+            <End Role="Arenda" EntitySet="Arenda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Arenda_TC" Association="Self.FK_Arenda_TC">
+            <End Role="TC" EntitySet="TC" />
+            <End Role="Arenda" EntitySet="Arenda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pavils_TC" Association="Self.FK_Pavils_TC">
+            <End Role="TC" EntitySet="TC" />
+            <End Role="Pavils" EntitySet="Pavils" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TorgovieCentriModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Arenda">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ID_arendatory" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ID_EMP" Type="Int32" />
+          <Property Name="NumberOfPavil" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Start_rent" Type="DateTime" Precision="3" />
+          <Property Name="Finisth_rent" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Arendatory" Relationship="Self.FK_Arenda_Arendatory" FromRole="Arenda" ToRole="Arendatory" />
+          <NavigationProperty Name="Employers" Relationship="Self.FK_Arenda_Employers" FromRole="Arenda" ToRole="Employers" />
+          <NavigationProperty Name="TC" Relationship="Self.FK_Arenda_TC" FromRole="Arenda" ToRole="TC" />
+        </EntityType>
+        <EntityType Name="Arendatory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Id_arend" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="17" FixedLength="true" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Arenda" Relationship="Self.FK_Arenda_Arendatory" FromRole="Arendatory" ToRole="Arenda" />
+        </EntityType>
+        <EntityType Name="Employers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Lname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Fname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Pass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="17" FixedLength="true" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Arenda" Relationship="Self.FK_Arenda_Employers" FromRole="Employers" ToRole="Arenda" />
+        </EntityType>
+        <EntityType Name="Pavils">
+          <Key>
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="NumberOfPavil" />
+            <PropertyRef Name="Stage" />
+          </Key>
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NumberOfPavil" Type="String" MaxLength="4" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Stage" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Area" Type="Double" />
+          <Property Name="PriceForMetr" Type="Double" />
+          <Property Name="Koef" Type="Double" />
+          <NavigationProperty Name="TC" Relationship="Self.FK_Pavils_TC" FromRole="Pavils" ToRole="TC" />
+        </EntityType>
+        <EntityType Name="TC">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CountPavil" Type="Int32" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="Koef" Type="Double" />
+          <Property Name="Stages" Type="Int32" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Arenda" Relationship="Self.FK_Arenda_TC" FromRole="TC" ToRole="Arenda" />
+          <NavigationProperty Name="Pavils" Relationship="Self.FK_Pavils_TC" FromRole="TC" ToRole="Pavils" />
+        </EntityType>
+        <Association Name="FK_Arenda_Arendatory">
+          <End Role="Arendatory" Type="Self.Arendatory" Multiplicity="0..1" />
+          <End Role="Arenda" Type="Self.Arenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Arendatory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Arenda">
+              <PropertyRef Name="ID_arendatory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Arenda_Employers">
+          <End Role="Employers" Type="Self.Employers" Multiplicity="0..1" />
+          <End Role="Arenda" Type="Self.Arenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Arenda">
+              <PropertyRef Name="ID_EMP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Arenda_TC">
+          <End Role="TC" Type="Self.TC" Multiplicity="0..1" />
+          <End Role="Arenda" Type="Self.Arenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TC">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="Arenda">
+              <PropertyRef Name="Name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pavils_TC">
+          <End Role="TC" Type="Self.TC" Multiplicity="1" />
+          <End Role="Pavils" Type="Self.Pavils" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TC">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="Pavils">
+              <PropertyRef Name="Name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="connection" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Arenda" EntityType="Self.Arenda" />
+          <EntitySet Name="Arendatory" EntityType="Self.Arendatory" />
+          <EntitySet Name="Employers" EntityType="Self.Employers" />
+          <EntitySet Name="Pavils" EntityType="Self.Pavils" />
+          <EntitySet Name="TC" EntityType="Self.TC" />
+          <AssociationSet Name="FK_Arenda_Arendatory" Association="Self.FK_Arenda_Arendatory">
+            <End Role="Arendatory" EntitySet="Arendatory" />
+            <End Role="Arenda" EntitySet="Arenda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Arenda_Employers" Association="Self.FK_Arenda_Employers">
+            <End Role="Employers" EntitySet="Employers" />
+            <End Role="Arenda" EntitySet="Arenda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Arenda_TC" Association="Self.FK_Arenda_TC">
+            <End Role="TC" EntitySet="TC" />
+            <End Role="Arenda" EntitySet="Arenda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pavils_TC" Association="Self.FK_Pavils_TC">
+            <End Role="TC" EntitySet="TC" />
+            <End Role="Pavils" EntitySet="Pavils" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TorgovieCentriModelStoreContainer" CdmEntityContainer="connection">
+          <EntitySetMapping Name="Arenda">
+            <EntityTypeMapping TypeName="TorgovieCentriModel.Arenda">
+              <MappingFragment StoreEntitySet="Arenda">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ID_arendatory" ColumnName="ID_arendatory" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID_EMP" ColumnName="ID_EMP" />
+                <ScalarProperty Name="NumberOfPavil" ColumnName="NumberOfPavil" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Start_rent" ColumnName="Start_rent" />
+                <ScalarProperty Name="Finisth_rent" ColumnName="Finisth_rent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Arendatory">
+            <EntityTypeMapping TypeName="TorgovieCentriModel.Arendatory">
+              <MappingFragment StoreEntitySet="Arendatory">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Id_arend" ColumnName="Id_arend" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employers">
+            <EntityTypeMapping TypeName="TorgovieCentriModel.Employers">
+              <MappingFragment StoreEntitySet="Employers">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Lname" ColumnName="Lname" />
+                <ScalarProperty Name="Fname" ColumnName="Fname" />
+                <ScalarProperty Name="Sname" ColumnName="Sname" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Pass" ColumnName="Pass" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pavils">
+            <EntityTypeMapping TypeName="TorgovieCentriModel.Pavils">
+              <MappingFragment StoreEntitySet="Pavils">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="NumberOfPavil" ColumnName="NumberOfPavil" />
+                <ScalarProperty Name="Stage" ColumnName="Stage" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="PriceForMetr" ColumnName="PriceForMetr" />
+                <ScalarProperty Name="Koef" ColumnName="Koef" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TC">
+            <EntityTypeMapping TypeName="TorgovieCentriModel.TC">
+              <MappingFragment StoreEntitySet="TC">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CountPavil" ColumnName="CountPavil" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Koef" ColumnName="Koef" />
+                <ScalarProperty Name="Stages" ColumnName="Stages" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
