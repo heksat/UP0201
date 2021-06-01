@@ -1,0 +1,58 @@
+﻿<Page x:Class="UP0201.Pages.InterfacePavils"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:UP0201.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="InterfacePavils">
+    <Grid x:Name="GridwithRes" DataContext="{Binding Changedpavil, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:InterfacePavils}}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="64*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="43*"/>
+            <ColumnDefinition Width="240"/>
+            <ColumnDefinition Width="120"/>
+            <ColumnDefinition Width="240"/>
+            <ColumnDefinition Width="43*"/>
+        </Grid.ColumnDefinitions>
+        <DockPanel  Grid.Column="1" HorizontalAlignment="Left" Height="63" LastChildFill="False" Grid.Row="1" VerticalAlignment="Top" Width="225" Margin="10,10,0,0" Grid.ColumnSpan="1" RenderTransformOrigin="0.5,0.5">
+            <TextBlock Height="23" TextWrapping="Wrap" Text="Название ТЦ"  DockPanel.Dock="Top"  VerticalAlignment="Top" Width="200"/>
+            <TextBox Text="{Binding Name}" Height="39" TextWrapping="Wrap" DockPanel.Dock="Bottom" Margin="10,0,13,0" />
+        </DockPanel>
+        <DockPanel Grid.Column="1" HorizontalAlignment="Left" Height="63" LastChildFill="False" Grid.Row="2" VerticalAlignment="Top" Width="225" Margin="5,7,0,0" Grid.ColumnSpan="1" RenderTransformOrigin="0.5,0.5">
+            <TextBlock Height="23" TextWrapping="Wrap" Text="Статус павильона"  DockPanel.Dock="Top"  VerticalAlignment="Top" Width="200"/>
+            <TextBox  Text="{Binding Status}" Height="39" TextWrapping="Wrap" DockPanel.Dock="Bottom" Margin="10,0,13,0" />
+        </DockPanel>
+        <DockPanel Grid.Column="2" HorizontalAlignment="Left" Height="63" LastChildFill="False" Grid.Row="1" VerticalAlignment="Top" Width="100" Margin="10,10,0,0" RenderTransformOrigin="0.5,0.5">
+            <TextBlock Height="23" TextWrapping="Wrap" Text="Номер этажа"  DockPanel.Dock="Top"  VerticalAlignment="Top"/>
+            <TextBox Text="{Binding Stage}" Height="39" TextWrapping="Wrap" DockPanel.Dock="Bottom" Margin="10,0,13,0" />
+        </DockPanel>
+        <DockPanel Grid.Column="2" HorizontalAlignment="Left" Height="63" LastChildFill="False" Grid.Row="2" VerticalAlignment="Top" Width="100" Margin="10,10,0,0" RenderTransformOrigin="0.5,0.5">
+            <TextBlock Height="23" TextWrapping="Wrap" Text="Площадь"  DockPanel.Dock="Top"  VerticalAlignment="Top"/>
+            <TextBox Text="{Binding Area}" Height="39" TextWrapping="Wrap" DockPanel.Dock="Bottom" Margin="10,0,13,0" />
+        </DockPanel>
+        <DockPanel Grid.Column="2" HorizontalAlignment="Left" Height="63" LastChildFill="False" Grid.Row="3" VerticalAlignment="Top" Width="100" Margin="10,10,0,0" RenderTransformOrigin="0.5,0.5">
+            <TextBlock Height="23" TextWrapping="Wrap" Text="Номер павильона"  DockPanel.Dock="Top"  VerticalAlignment="Top"/>
+            <TextBox Text="{Binding NumberOfPavil}" Height="39" TextWrapping="Wrap" DockPanel.Dock="Bottom" Margin="10,0,13,0" />
+        </DockPanel>
+        <DockPanel Grid.Column="2" HorizontalAlignment="Left" Height="63" LastChildFill="False" Grid.Row="4" VerticalAlignment="Top" Width="100" Margin="10,10,0,0" RenderTransformOrigin="0.5,0.5">
+            <TextBlock Height="23" TextWrapping="Wrap" Text="Коэф. дос. стоим."  DockPanel.Dock="Top"  VerticalAlignment="Top"/>
+            <TextBox Text="{Binding Koef}" Height="39" TextWrapping="Wrap" DockPanel.Dock="Bottom" Margin="10,0,13,0" />
+        </DockPanel>
+        <DockPanel Grid.Column="2" HorizontalAlignment="Left" Height="63" LastChildFill="False" Grid.Row="5" VerticalAlignment="Top" Width="100" Margin="10,17,0,0" RenderTransformOrigin="0.5,0.5">
+            <TextBlock Height="23" TextWrapping="Wrap" Text="Цена за кв. метр"  DockPanel.Dock="Top"  VerticalAlignment="Top"/>
+            <TextBox Text="{Binding PriceForMetr}" Height="39" TextWrapping="Wrap" DockPanel.Dock="Bottom" Margin="10,0,13,0" />
+        </DockPanel>
+        <Button Content="Изменить" Grid.Column="3" HorizontalAlignment="Left" Margin="59,21,0,0" Grid.Row="3" VerticalAlignment="Top" Width="124" Height="38" Click="Button_Click"/>
+
+    </Grid>
+</Page>
