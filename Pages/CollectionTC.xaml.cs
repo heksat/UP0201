@@ -37,7 +37,7 @@ namespace UP0201.Pages
             string chek2 = STATUSCOMBO.Text;
             using (DBContext db = new DBContext())
             {
-                var olo = db.TC.Where(x => (x.Status == chek2 || x.Status==null || x.Status == "") && (x.City.Contains(chek1) || x.City == null) && x.Status!="Удален").ToList();
+                var olo = db.TC.Where(x => (x.Status == chek2 || STATUSCOMBO.SelectedIndex==-1) && (x.City.Contains(chek1) || chek1 == "") && x.Status!="Удален").ToList();
                 COLLECTTC.ItemsSource = olo;
             }
         }

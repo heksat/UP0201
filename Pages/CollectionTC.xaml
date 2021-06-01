@@ -22,7 +22,7 @@
             <RowDefinition Height="301.6"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <DataGrid x:Name="COLLECTTC" HorizontalAlignment="Left" AutoGenerateColumns ="False" Height="360" VerticalAlignment="Top" Width="580" Margin="10,10,0,0" RenderTransformOrigin="0.277,0.254" Grid.ColumnSpan="4" Grid.Row="1" Grid.RowSpan="2">
+        <DataGrid x:Name="COLLECTTC" HorizontalAlignment="Left" IsReadOnly="True" AutoGenerateColumns ="False" Height="360" VerticalAlignment="Top" Width="580" Margin="10,10,0,0" RenderTransformOrigin="0.277,0.254" Grid.ColumnSpan="4" Grid.Row="1" Grid.RowSpan="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Название ТЦ" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Статус" Binding="{Binding Status}"/>

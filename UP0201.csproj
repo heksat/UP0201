@@ -105,8 +105,17 @@
     <Compile Include="Pages\CollectionPavils.xaml.cs">
       <DependentUpon>CollectionPavils.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\CollectionTC.xaml.cs">
+      <DependentUpon>CollectionTC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\InterfacePavils.xaml.cs">
       <DependentUpon>InterfacePavils.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\InterfaceTC.xaml.cs">
+      <DependentUpon>InterfaceTC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MainMenu.xaml.cs">
+      <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pavils.cs">
       <DependentUpon>DBContext.tt</DependentUpon>
@@ -144,9 +153,21 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\CollectionTC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\InterfacePavils.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\InterfaceTC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\MainMenu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>

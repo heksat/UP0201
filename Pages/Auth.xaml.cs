@@ -40,7 +40,7 @@ namespace UP0201.Pages
                 if (roleuser != null)
                 {
                     MessageBox.Show("Успешный вход!");
-                    //NavigationService.Navigate();
+                    NavigationService.Navigate(new MainMenu());
                 }
                 else
                 {
