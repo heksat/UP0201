@@ -53,6 +53,7 @@
             <TextBox Text="{Binding PriceForMetr}" Height="39" TextWrapping="Wrap" DockPanel.Dock="Bottom" Margin="10,0,13,0" />
         </DockPanel>
         <Button Content="Изменить" Grid.Column="3" HorizontalAlignment="Left" Margin="59,21,0,0" Grid.Row="3" VerticalAlignment="Top" Width="124" Height="38" Click="Button_Click"/>
+        <Button Content="Button" Grid.Column="1" HorizontalAlignment="Left" Margin="59,21,0,0" Grid.Row="4" VerticalAlignment="Top" Width="107" Height="39" Click="Button_Click_1"/>
 
     </Grid>
 </Page>

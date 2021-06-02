@@ -28,6 +28,7 @@ namespace UP0201.Pages
         public InterfacePavils()
         {
             InitializeComponent();
+            Changedpavil = new Pavils();
 
         }
         public InterfacePavils(Pavils currentpavil) : this()
@@ -42,6 +43,15 @@ namespace UP0201.Pages
         {
             db.Pavils.Add(Changedpavil);
             db.SaveChanges();
+            db.Entry(Changedpavil).State = EntityState.Detached;
+            NavigationService.GoBack();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            db.Pavils.Add(Changedpavil);
+            db.SaveChanges();
+            db.Entry(Changedpavil).State = EntityState.Detached;
             NavigationService.GoBack();
         }
     }

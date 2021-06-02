@@ -60,14 +60,18 @@ namespace UP0201.Pages
         }
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
-            string pid = ((TC)COLLECTTC.SelectedItem).Name;
-            using (DBContext db = new DBContext())
+            try
             {
-                var removeitem = db.TC.Where(x => x.Name == pid).Select(y => y).FirstOrDefault();
-                db.TC.Remove(removeitem);
-                db.SaveChanges();
-                COLLECTTC.ItemsSource = db.TC.ToList();
+                string pid = ((TC)COLLECTTC.SelectedItem).Name;
+                using (DBContext db = new DBContext())
+                {
+                    var removeitem = db.TC.Where(x => x.Name == pid).Select(y => y).FirstOrDefault();
+                    db.TC.Remove(removeitem);
+                    db.SaveChanges();
+                    COLLECTTC.ItemsSource = db.TC.ToList();
+                }
             }
+            catch { MessageBox.Show("В данном ТЦ еще есть павильоны удалите для начала их"); }
         }
 
         private void add_Click(object sender, RoutedEventArgs e)

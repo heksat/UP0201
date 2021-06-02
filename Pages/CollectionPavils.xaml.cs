@@ -56,17 +56,35 @@ namespace UP0201.Pages
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
-            using (var db = new DBContext())
+            if (((Pavils)CollectionItem.SelectedItem).Status!="Забронирован" && ((Pavils)CollectionItem.SelectedItem).Status != "Арендован"){
+                using (var db = new DBContext())
+                {
+                    db.Entry((Pavils)CollectionItem.SelectedItem).State = EntityState.Deleted;
+                    db.SaveChanges();
+                    CollectionItem.ItemsSource = db.Pavils.ToList();
+                }
+            }
+            else
             {
-                db.Entry((Pavils)CollectionItem.SelectedItem).State = EntityState.Deleted;
-                db.SaveChanges();
-                CollectionItem.ItemsSource = db.Pavils.ToList();
+                MessageBox.Show("Такое удалять\\изменять нельзя");
             }
         }
 
         private void Changed_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new InterfacePavils((Pavils)CollectionItem.SelectedItem));
+            if (((Pavils)CollectionItem.SelectedItem).Status != "Забронирован" && ((Pavils)CollectionItem.SelectedItem).Status != "Арендован")
+            {
+
+                NavigationService.Navigate(new InterfacePavils((Pavils)CollectionItem.SelectedItem));
+            }
+            else
+            {
+                MessageBox.Show("Такое удалять\\изменять нельзя");
+            }
+        }
+        private void Changed_Clic1k(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new InterfacePavils());
         }
     }
 }
