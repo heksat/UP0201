@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TorgovieCentriModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TorgovieCentriModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Arenda">
           <Key>
             <PropertyRef Name="Id" />
@@ -118,6 +118,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="ViewTC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nameTC" Type="nvarchar" Mode="In" />
+        </Function>
         <EntityContainer Name="TorgovieCentriModelStoreContainer">
           <EntitySet Name="Arenda" EntityType="Self.Arenda" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Arendatory" EntityType="Self.Arendatory" Schema="dbo" store:Type="Tables" />
@@ -141,8 +144,7 @@
             <End Role="Pavils" EntitySet="Pavils" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TorgovieCentriModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -289,7 +291,17 @@
             <End Role="TC" EntitySet="TC" />
             <End Role="Pavils" EntitySet="Pavils" />
           </AssociationSet>
+          <FunctionImport Name="ViewTC" ReturnType="Collection(TorgovieCentriModel.ViewTC_Result)">
+            <Parameter Name="nameTC" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="ViewTC_Result">
+          <Property Type="Int32" Name="FreePav" Nullable="true" />
+          <Property Type="Int32" Name="Rent" Nullable="true" />
+          <Property Type="Int32" Name="AllPavils" Nullable="true" />
+          <Property Type="Double" Name="AreaSUM" Nullable="true" />
+          <Property Type="Double" Name="AVGPRICEFORMETR" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -364,6 +376,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ViewTC" FunctionName="TorgovieCentriModel.Store.ViewTC">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TorgovieCentriModel.ViewTC_Result">
+                <ScalarProperty Name="FreePav" ColumnName="FreePav" />
+                <ScalarProperty Name="Rent" ColumnName="Rent" />
+                <ScalarProperty Name="AllPavils" ColumnName="AllPavils" />
+                <ScalarProperty Name="AreaSUM" ColumnName="AreaSUM" />
+                <ScalarProperty Name="AVGPRICEFORMETR" ColumnName="AVGPRICEFORMETR" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

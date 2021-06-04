@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b118e54b0ca34b218e6d11159eb01f17" Name="Diagram1">
+      <Diagram DiagramId="b118e54b0ca34b218e6d11159eb01f17" Name="Diagram1" ZoomLevel="71">
         <EntityTypeShape EntityType="TorgovieCentriModel.Arenda" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="TorgovieCentriModel.Arendatory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TorgovieCentriModel.Employers" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />

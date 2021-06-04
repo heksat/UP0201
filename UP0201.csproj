@@ -102,11 +102,17 @@
     <Compile Include="Employers.cs">
       <DependentUpon>DBContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Pages\CollectionArendatories.xaml.cs">
+      <DependentUpon>CollectionArendatories.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\CollectionPavils.xaml.cs">
       <DependentUpon>CollectionPavils.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\CollectionTC.xaml.cs">
       <DependentUpon>CollectionTC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\InterfaceArendatories.xaml.cs">
+      <DependentUpon>InterfaceArendatories.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\InterfacePavils.xaml.cs">
       <DependentUpon>InterfacePavils.xaml</DependentUpon>
@@ -117,10 +123,16 @@
     <Compile Include="Pages\MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ProcViewTC.xaml.cs">
+      <DependentUpon>ProcViewTC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pavils.cs">
       <DependentUpon>DBContext.tt</DependentUpon>
     </Compile>
     <Compile Include="TC.cs">
+      <DependentUpon>DBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewTC_Result.cs">
       <DependentUpon>DBContext.tt</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
@@ -149,6 +161,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\CollectionArendatories.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\CollectionPavils.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -156,6 +172,10 @@
     <Page Include="Pages\CollectionTC.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\InterfaceArendatories.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\InterfacePavils.xaml">
       <SubType>Designer</SubType>
@@ -168,6 +188,10 @@
     <Page Include="Pages\MainMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ProcViewTC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -221,6 +245,7 @@
       <DependentUpon>DBContext.edmx</DependentUpon>
       <LastGenOutput>DBContext.cs</LastGenOutput>
     </Content>
+    <Content Include="UPskript.sql" />
     <Resource Include="Resources\CAPTCHAback.png" />
   </ItemGroup>
   <ItemGroup>

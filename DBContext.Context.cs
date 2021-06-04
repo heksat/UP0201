@@ -12,6 +12,8 @@ namespace UP0201
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class DBContext : DbContext
     {
@@ -30,5 +32,14 @@ namespace UP0201
         public virtual DbSet<Employers> Employers { get; set; }
         public virtual DbSet<Pavils> Pavils { get; set; }
         public virtual DbSet<TC> TC { get; set; }
+    
+        public virtual ObjectResult<ViewTC_Result> ViewTC(string nameTC)
+        {
+            var nameTCParameter = nameTC != null ?
+                new ObjectParameter("nameTC", nameTC) :
+                new ObjectParameter("nameTC", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ViewTC_Result>("ViewTC", nameTCParameter);
+        }
     }
 }
