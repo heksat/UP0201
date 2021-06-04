@@ -14,6 +14,7 @@
         <AssociationConnector Association="TorgovieCentriModel.FK_Arenda_Employers" ManuallyRouted="false" />
         <AssociationConnector Association="TorgovieCentriModel.FK_Arenda_TC" ManuallyRouted="false" />
         <AssociationConnector Association="TorgovieCentriModel.FK_Pavils_TC" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TorgovieCentriModel.sysdiagrams" Width="1.5" PointX="3.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
