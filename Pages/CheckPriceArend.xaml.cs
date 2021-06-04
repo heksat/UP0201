@@ -16,24 +16,25 @@ using System.Windows.Shapes;
 namespace UP0201.Pages
 {
     /// <summary>
-    /// Interaction logic for ProcViewTC.xaml
+    /// Interaction logic for CheckPriceArend.xaml
     /// </summary>
-    public partial class ProcViewTC : Page
+    public partial class CheckPriceArend : Page
     {
-  
-        public ProcViewTC()
+        public CheckPriceArend()
         {
             InitializeComponent();
-            using (var db = new DBContext()) {
-                TCCollect.ItemsSource = db.TC.Select(x=>x.Name).ToList();
+            using (var db = new DBContext())
+            {
+                cmdbox.ItemsSource = db.Arendatory.ToList();
+                
             }
         }
 
-        private void ChangeName(object sender, SelectionChangedEventArgs e)
+        private void cmdbox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             using (var db = new DBContext())
             {
-                CollectionItems.ItemsSource = db.ViewTC(TCCollect.SelectedItem.ToString()).ToList();
+                CollectionItems.ItemsSource = db.ViewStoimostArend((int?)cmdbox.SelectedValue).ToList();
             }
         }
     }
