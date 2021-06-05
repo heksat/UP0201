@@ -14,12 +14,17 @@
             <ColumnDefinition Width="280.8"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="144"/>
+            <RowDefinition Height="32.432"/>
+            <RowDefinition Height="66"/>
+            <RowDefinition Height="46"/>
             <RowDefinition Height="67.2"/>
             <RowDefinition Height="64"/>
-            <RowDefinition Height="174"/>
+            <RowDefinition Height="65"/>
+            <RowDefinition Height="109"/>
         </Grid.RowDefinitions>
-        <Button Content="Список ТЦ" HorizontalAlignment="Left" Margin="25.8,19,0,0" VerticalAlignment="Top" Width="132" Height="40" Click="SpisTC_Click" Grid.Column="1" Grid.Row="1"/>
-        <Button Content="Список Павильонов" HorizontalAlignment="Left" Margin="25.8,12.8,0,0" VerticalAlignment="Top" Width="132" Height="40" Grid.Row="2" Grid.Column="1" Click="Button_Click"/>
+        <Button Content="Список ТЦ" x:Name="TCbut" IsEnabled="False" HorizontalAlignment="Left" Margin="26,19,0,0" VerticalAlignment="Top" Width="132" Height="40" Click="SpisTC_Click" Grid.Column="1" Grid.Row="3"/>
+        <Button Content="Список Павильонов" x:Name="Pavilbut" IsEnabled="False" HorizontalAlignment="Left" Margin="26,13,0,0" VerticalAlignment="Top" Width="132" Height="40" Grid.Row="4" Grid.Column="1" Click="Button_Click"/>
+        <Button Content="Арендаторы" x:Name="Arenbut" IsEnabled="False" HorizontalAlignment="Left" Margin="26,6,0,0" VerticalAlignment="Top" Width="132" Height="40" Grid.Column="1" Grid.Row="2" Click="Button_Click_2"/>
+        <Button Content="Пользователи" x:Name="Userbut" IsEnabled="False" HorizontalAlignment="Left" Margin="26,16,0,0" VerticalAlignment="Top" Width="132" Height="40" Grid.Column="1" Grid.Row="1" Click="Button_Click_1"/>
     </Grid>
 </Page>

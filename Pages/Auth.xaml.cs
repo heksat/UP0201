@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -38,8 +39,27 @@ namespace UP0201.Pages
                 }
                 if (roleuser != null)
                 {
-                    MessageBox.Show("Успешный вход!");
-                    NavigationService.Navigate(new MainMenu());
+                    var menu = new MainMenu();
+                    switch (roleuser) {
+                        case "Менеджер А":
+                            {
+                                menu.lvllock = 3;
+                                NavigationService.Navigate(menu);
+                            }
+                            break;
+                        case "Администратор":
+                            {
+                                menu.lvllock = 2;
+                                NavigationService.Navigate(menu);
+                            } break;
+                        case "Менеджер С":
+                            {
+                                menu.lvllock = 1;
+                                NavigationService.Navigate(menu);
+                            }
+                            break;
+                        default: MessageBox.Show("Role Unknows"); break;
+                    }
                 }
                 else
                 {

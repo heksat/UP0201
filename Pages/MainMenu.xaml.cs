@@ -20,9 +20,34 @@ namespace UP0201.Pages
     /// </summary>
     public partial class MainMenu : Page
     {
+        public int lvllock { get; set; } 
         public MainMenu()
         {
             InitializeComponent();
+            switch (lvllock)
+            {
+                case 2: 
+                    {
+                        Userbut.IsEnabled = true;
+                        TCbut.IsEnabled = true;
+                        Pavilbut.IsEnabled = true;
+                        Arenbut.IsEnabled = true;
+                        Userbut.IsEnabled = true;
+                    } break;
+                case 1 :
+                    {
+                        Pavilbut.IsEnabled = true;
+                        TCbut.IsEnabled = true;
+                    }
+                    break;
+                case 3:
+                    {
+                        TCbut.IsEnabled = true;
+                        Pavilbut.IsEnabled = true;
+                        Arenbut.IsEnabled = true;
+                    }
+                    break;
+            }
         }
 
         private void SpisTC_Click(object sender, RoutedEventArgs e)
@@ -33,6 +58,16 @@ namespace UP0201.Pages
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new CollectionPavils());//
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AdminPage());
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new CollectionArendatories());
         }
     }
 }

@@ -129,6 +129,10 @@
           </ReferentialConstraint>
         </Association>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="funcofposchet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="float">
+          <Parameter Name="priceTC" Type="float" Mode="In" />
+          <Parameter Name="nameoftc" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
           <Parameter Name="owner_id" Type="int" Mode="In" />
@@ -159,6 +163,10 @@
           <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spisfunc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="peredfunc" Type="float" Mode="In" />
+          <Parameter Name="nameoftc" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="STOIMOSTAREND" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
           <Parameter Name="area" Type="float" Mode="In" />
           <Parameter Name="areaM" Type="float" Mode="In" />
@@ -321,7 +329,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="connection" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="DBContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Arenda" EntityType="Self.Arenda" />
           <EntitySet Name="Arendatory" EntityType="Self.Arendatory" />
           <EntitySet Name="Employers" EntityType="Self.Employers" />
@@ -377,7 +385,11 @@
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
           <FunctionImport Name="ViewStoimostArend" ReturnType="Collection(TorgovieCentriModel.ViewStoimostArend_Result)" >
-            <Parameter Name="idarend" Mode="In" Type="Int32" />
+          <Parameter Name="idarend" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spisfunc" ReturnType="Collection(TorgovieCentriModel.spisfunc_Result)">
+            <Parameter Name="peredfunc" Mode="In" Type="Double" />
+            <Parameter Name="nameoftc" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="ViewTC_Result">
@@ -407,12 +419,17 @@
           <Property Type="Int32" Name="StoimostFunc" Nullable="true" />
           <Property Type="String" Name="Status" Nullable="true" MaxLength="50" />
         </ComplexType>
+        <ComplexType Name="spisfunc_Result">
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+          <Property Type="Double" Name="procentokupaemosti" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="TorgovieCentriModelStoreContainer" CdmEntityContainer="connection">
+        <EntityContainerMapping StorageEntityContainer="TorgovieCentriModelStoreContainer" CdmEntityContainer="DBContext">
           <EntitySetMapping Name="Arenda">
             <EntityTypeMapping TypeName="TorgovieCentriModel.Arenda">
               <MappingFragment StoreEntitySet="Arenda">
@@ -526,6 +543,15 @@
                 <ScalarProperty Name="Finisth_rent" ColumnName="Finisth_rent" />
                 <ScalarProperty Name="StoimostFunc" ColumnName="StoimostFunc" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spisfunc" FunctionName="TorgovieCentriModel.Store.spisfunc">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TorgovieCentriModel.spisfunc_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="procentokupaemosti" ColumnName="procentokupaemosti" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
