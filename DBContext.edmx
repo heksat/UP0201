@@ -175,7 +175,7 @@
           <Parameter Name="m" Type="int" Mode="In" />
         </Function>
         <Function Name="ViewStoimostArend" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="idarend" Type="int" Mode="In" />
+          <Parameter Name="id" Type="int" Mode="In" />
         </Function>
         <Function Name="ViewTC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nameTC" Type="nvarchar" Mode="In" />
@@ -384,12 +384,12 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
-          <FunctionImport Name="ViewStoimostArend" ReturnType="Collection(TorgovieCentriModel.ViewStoimostArend_Result)" >
-          <Parameter Name="idarend" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="spisfunc" ReturnType="Collection(TorgovieCentriModel.spisfunc_Result)">
             <Parameter Name="peredfunc" Mode="In" Type="Double" />
             <Parameter Name="nameoftc" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ViewStoimostArend" ReturnType="Collection(TorgovieCentriModel.ViewStoimostArend_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="ViewTC_Result">
@@ -410,6 +410,11 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="spisfunc_Result">
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+          <Property Type="Double" Name="procentokupaemosti" Nullable="true" />
+        </ComplexType>
         <ComplexType Name="ViewStoimostArend_Result">
           <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="NumberOfPavil" Nullable="true" MaxLength="4" />
@@ -418,11 +423,6 @@
           <Property Type="DateTime" Name="Finisth_rent" Nullable="true" Precision="23" />
           <Property Type="Int32" Name="StoimostFunc" Nullable="true" />
           <Property Type="String" Name="Status" Nullable="true" MaxLength="50" />
-        </ComplexType>
-        <ComplexType Name="spisfunc_Result">
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
-          <Property Type="Double" Name="procentokupaemosti" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -533,6 +533,15 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="TorgovieCentriModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="TorgovieCentriModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="spisfunc" FunctionName="TorgovieCentriModel.Store.spisfunc">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TorgovieCentriModel.spisfunc_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="procentokupaemosti" ColumnName="procentokupaemosti" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ViewStoimostArend" FunctionName="TorgovieCentriModel.Store.ViewStoimostArend">
             <ResultMapping>
               <ComplexTypeMapping TypeName="TorgovieCentriModel.ViewStoimostArend_Result">
@@ -543,15 +552,6 @@
                 <ScalarProperty Name="Finisth_rent" ColumnName="Finisth_rent" />
                 <ScalarProperty Name="StoimostFunc" ColumnName="StoimostFunc" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="spisfunc" FunctionName="TorgovieCentriModel.Store.spisfunc">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="TorgovieCentriModel.spisfunc_Result">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="procentokupaemosti" ColumnName="procentokupaemosti" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

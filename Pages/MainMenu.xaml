@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:UP0201.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="MainMenu">
+      Title="MainMenu" Loaded="Page_Loaded"
+      >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="298.4"/>
@@ -26,5 +27,6 @@
         <Button Content="Список Павильонов" x:Name="Pavilbut" IsEnabled="False" HorizontalAlignment="Left" Margin="26,13,0,0" VerticalAlignment="Top" Width="132" Height="40" Grid.Row="4" Grid.Column="1" Click="Button_Click"/>
         <Button Content="Арендаторы" x:Name="Arenbut" IsEnabled="False" HorizontalAlignment="Left" Margin="26,6,0,0" VerticalAlignment="Top" Width="132" Height="40" Grid.Column="1" Grid.Row="2" Click="Button_Click_2"/>
         <Button Content="Пользователи" x:Name="Userbut" IsEnabled="False" HorizontalAlignment="Left" Margin="26,16,0,0" VerticalAlignment="Top" Width="132" Height="40" Grid.Column="1" Grid.Row="1" Click="Button_Click_1"/>
+        <Button Content="Функция окупаемости" x:Name="func" IsEnabled="False" HorizontalAlignment="Left" Margin="25.8,15.2,0,0" VerticalAlignment="Top" Width="132" Height="40" Grid.Row="5" Grid.Column="1" Click="Button_Click4"/>
     </Grid>
 </Page>

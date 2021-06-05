@@ -37,5 +37,10 @@ namespace UP0201.Pages
                 CollectionItems.ItemsSource = db.ViewStoimostArend((int?)cmdbox.SelectedValue).ToList();
             }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ProcViewTC());
+        }
     }
 }

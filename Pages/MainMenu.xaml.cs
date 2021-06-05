@@ -24,30 +24,7 @@ namespace UP0201.Pages
         public MainMenu()
         {
             InitializeComponent();
-            switch (lvllock)
-            {
-                case 2: 
-                    {
-                        Userbut.IsEnabled = true;
-                        TCbut.IsEnabled = true;
-                        Pavilbut.IsEnabled = true;
-                        Arenbut.IsEnabled = true;
-                        Userbut.IsEnabled = true;
-                    } break;
-                case 1 :
-                    {
-                        Pavilbut.IsEnabled = true;
-                        TCbut.IsEnabled = true;
-                    }
-                    break;
-                case 3:
-                    {
-                        TCbut.IsEnabled = true;
-                        Pavilbut.IsEnabled = true;
-                        Arenbut.IsEnabled = true;
-                    }
-                    break;
-            }
+            
         }
 
         private void SpisTC_Click(object sender, RoutedEventArgs e)
@@ -68,6 +45,41 @@ namespace UP0201.Pages
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new CollectionArendatories());
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            switch (lvllock)
+            {
+                case 2:
+                    {
+                        Userbut.IsEnabled = true;
+                        TCbut.IsEnabled = true;
+                        Pavilbut.IsEnabled = true;
+                        Arenbut.IsEnabled = true;
+                        Userbut.IsEnabled = true;
+                    }
+                    break;
+                case 1:
+                    {
+                        Pavilbut.IsEnabled = true;
+                        TCbut.IsEnabled = true;
+                    }
+                    break;
+                case 3:
+                    {
+                        TCbut.IsEnabled = true;
+                        Pavilbut.IsEnabled = true;
+                        Arenbut.IsEnabled = true;
+                        func.IsEnabled = true;
+                    }
+                    break;
+            }
+        }
+
+        private void Button_Click4(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new TCfunction());
         }
     }
 }

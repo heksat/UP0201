@@ -35,5 +35,10 @@ namespace UP0201.Pages
             page.item = (Arendatory)CollectionItem.SelectedItem;
             NavigationService.Navigate(page);
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new CheckPriceArend());
+        }
     }
 }

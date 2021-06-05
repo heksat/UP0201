@@ -40,7 +40,7 @@
                 <DataGridTextColumn Header="Адрес" Binding="{Binding Address}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Поиск" HorizontalAlignment="Left" Margin="49,10,0,0" VerticalAlignment="Top" Width="110" Height="45" Grid.Column="2" />
+        <Button Content="Поиск" HorizontalAlignment="Left" Margin="49,10,0,0" VerticalAlignment="Top" Width="110" Height="45" Grid.Column="2" Click="Button_Click_1" />
         <TextBlock x:Name="FindName" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="25,20,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="38" Width="260"/>
     </Grid>
 </Page>

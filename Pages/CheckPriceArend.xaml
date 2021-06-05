@@ -21,6 +21,7 @@
         </Grid.ColumnDefinitions>
         <DataGrid IsReadOnly="True" x:Name="CollectionItems" HorizontalAlignment="Left" Height="208" Margin="85,121,0,0" Grid.Row="1" VerticalAlignment="Top" Width="574" Grid.Column="1"/>
         <ComboBox x:Name="cmdbox" DisplayMemberPath="Name" SelectedValuePath="ID" SelectedValue="{Binding Path=ID}" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="188" Height="47" SelectionChanged="cmdbox_SelectionChanged"/>
+        <Button Content="Button" Grid.Column="1" HorizontalAlignment="Left" Margin="436.6,32.8,0,0" Grid.Row="1" VerticalAlignment="Top" Width="137" Height="43" Click="Button_Click"/>
 
     </Grid>
 </Page>
