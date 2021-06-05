@@ -11,12 +11,14 @@ namespace UP0201
 {
     using System;
     
-    public partial class sp_helpdiagrams_Result
+    public partial class ViewStoimostArend_Result
     {
-        public string Database { get; set; }
         public string Name { get; set; }
-        public int ID { get; set; }
-        public string Owner { get; set; }
-        public int OwnerID { get; set; }
+        public string NumberOfPavil { get; set; }
+        public string City { get; set; }
+        public Nullable<System.DateTime> Start_rent { get; set; }
+        public Nullable<System.DateTime> Finisth_rent { get; set; }
+        public Nullable<int> StoimostFunc { get; set; }
+        public string Status { get; set; }
     }
 }

@@ -5,5 +5,5 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UP0201"
         mc:Ignorable="d"
-        Title="MainWindow" Source="/Pages/TCfunction.xaml" Height="450" Width="800" ShowsNavigationUI="False">
+        Title="MainWindow" Source="/Pages/CheckPriceArend.xaml" Height="450" Width="800" ShowsNavigationUI="False">
 </NavigationWindow>

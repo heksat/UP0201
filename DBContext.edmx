@@ -129,10 +129,6 @@
           </ReferentialConstraint>
         </Association>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
-        <Function Name="funcofposchet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="float">
-          <Parameter Name="priceTC" Type="float" Mode="In" />
-          <Parameter Name="nameoftc" Type="nvarchar" Mode="In" />
-        </Function>
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
           <Parameter Name="owner_id" Type="int" Mode="In" />
@@ -163,16 +159,18 @@
           <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="spisfunc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="peredfunc" Type="float" Mode="In" />
-          <Parameter Name="nameoftc" Type="nvarchar" Mode="In" />
-        </Function>
         <Function Name="STOIMOSTAREND" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
           <Parameter Name="area" Type="float" Mode="In" />
           <Parameter Name="areaM" Type="float" Mode="In" />
           <Parameter Name="level" Type="int" Mode="In" />
           <Parameter Name="complex" Type="int" Mode="In" />
           <Parameter Name="m" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ViewStoimostArend" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idarend" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ViewTC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nameTC" Type="nvarchar" Mode="In" />
         </Function>
         <EntityContainer Name="TorgovieCentriModelStoreContainer">
           <EntitySet Name="Arenda" EntityType="Self.Arenda" Schema="dbo" store:Type="Tables" />
@@ -345,6 +343,9 @@
             <End Role="TC" EntitySet="TC" />
             <End Role="Pavils" EntitySet="Pavils" />
           </AssociationSet>
+          <FunctionImport Name="ViewTC" ReturnType="Collection(TorgovieCentriModel.ViewTC_Result)">
+          <Parameter Name="nameTC" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
@@ -375,12 +376,17 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
-          <FunctionImport Name="spisfunc" ReturnType="Collection(TorgovieCentriModel.spisfunc_Result)">
-            <Parameter Name="peredfunc" Mode="In" Type="Double" />
-            <Parameter Name="nameoftc" Mode="In" Type="String" />
+          <FunctionImport Name="ViewStoimostArend" ReturnType="Collection(TorgovieCentriModel.ViewStoimostArend_Result)" >
+            <Parameter Name="idarend" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="sysdiagrams" EntityType="TorgovieCentriModel.sysdiagrams" />
         </EntityContainer>
+        <ComplexType Name="ViewTC_Result">
+          <Property Type="Int32" Name="FreePav" Nullable="true" />
+          <Property Type="Int32" Name="Rent" Nullable="true" />
+          <Property Type="Int32" Name="AllPavils" Nullable="true" />
+          <Property Type="Double" Name="AreaSUM" Nullable="true" />
+          <Property Type="Double" Name="AVGPRICEFORMETR" Nullable="true" />
+        </ComplexType>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
           <Property Type="Binary" Name="definition" Nullable="true" />
@@ -392,21 +398,15 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
-        <ComplexType Name="spisfunc_Result">
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+        <ComplexType Name="ViewStoimostArend_Result">
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NumberOfPavil" Nullable="true" MaxLength="4" />
           <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
-          <Property Type="Double" Name="procentokupaemosti" Nullable="true"/>
+          <Property Type="DateTime" Name="Start_rent" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="Finisth_rent" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="StoimostFunc" Nullable="true" />
+          <Property Type="String" Name="Status" Nullable="true" MaxLength="50" />
         </ComplexType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -481,6 +481,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ViewTC" FunctionName="TorgovieCentriModel.Store.ViewTC">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TorgovieCentriModel.ViewTC_Result">
+                <ScalarProperty Name="FreePav" ColumnName="FreePav" />
+                <ScalarProperty Name="Rent" ColumnName="Rent" />
+                <ScalarProperty Name="AllPavils" ColumnName="AllPavils" />
+                <ScalarProperty Name="AreaSUM" ColumnName="AreaSUM" />
+                <ScalarProperty Name="AVGPRICEFORMETR" ColumnName="AVGPRICEFORMETR" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="TorgovieCentriModel.Store.sp_alterdiagram" />
           <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="TorgovieCentriModel.Store.sp_creatediagram" />
           <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="TorgovieCentriModel.Store.sp_dropdiagram" />
@@ -505,26 +516,19 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="TorgovieCentriModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="TorgovieCentriModel.Store.sp_upgraddiagrams" />
-          <FunctionImportMapping FunctionImportName="spisfunc" FunctionName="TorgovieCentriModel.Store.spisfunc">
+          <FunctionImportMapping FunctionImportName="ViewStoimostArend" FunctionName="TorgovieCentriModel.Store.ViewStoimostArend">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="TorgovieCentriModel.spisfunc_Result">
+              <ComplexTypeMapping TypeName="TorgovieCentriModel.ViewStoimostArend_Result">
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="NumberOfPavil" ColumnName="NumberOfPavil" />
                 <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="procentokupaemosti" ColumnName="procentokupaemosti" />
+                <ScalarProperty Name="Start_rent" ColumnName="Start_rent" />
+                <ScalarProperty Name="Finisth_rent" ColumnName="Finisth_rent" />
+                <ScalarProperty Name="StoimostFunc" ColumnName="StoimostFunc" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="TorgovieCentriModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

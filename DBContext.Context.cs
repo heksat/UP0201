@@ -32,7 +32,15 @@ namespace UP0201
         public virtual DbSet<Employers> Employers { get; set; }
         public virtual DbSet<Pavils> Pavils { get; set; }
         public virtual DbSet<TC> TC { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+    
+        public virtual ObjectResult<ViewTC_Result> ViewTC(string nameTC)
+        {
+            var nameTCParameter = nameTC != null ?
+                new ObjectParameter("nameTC", nameTC) :
+                new ObjectParameter("nameTC", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ViewTC_Result>("ViewTC", nameTCParameter);
+        }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -137,17 +145,13 @@ namespace UP0201
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
         }
     
-        public virtual ObjectResult<spisfunc_Result> spisfunc(Nullable<double> peredfunc, string nameoftc)
+        public virtual ObjectResult<ViewStoimostArend_Result> ViewStoimostArend(Nullable<int> idarend)
         {
-            var peredfuncParameter = peredfunc.HasValue ?
-                new ObjectParameter("peredfunc", peredfunc) :
-                new ObjectParameter("peredfunc", typeof(double));
+            var idarendParameter = idarend.HasValue ?
+                new ObjectParameter("idarend", idarend) :
+                new ObjectParameter("idarend", typeof(int));
     
-            var nameoftcParameter = nameoftc != null ?
-                new ObjectParameter("nameoftc", nameoftc) :
-                new ObjectParameter("nameoftc", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spisfunc_Result>("spisfunc", peredfuncParameter, nameoftcParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ViewStoimostArend_Result>("ViewStoimostArend", idarendParameter);
         }
     }
 }

@@ -11,12 +11,12 @@ namespace UP0201
 {
     using System;
     
-    public partial class sp_helpdiagrams_Result
+    public partial class ViewTC_Result
     {
-        public string Database { get; set; }
-        public string Name { get; set; }
-        public int ID { get; set; }
-        public string Owner { get; set; }
-        public int OwnerID { get; set; }
+        public Nullable<int> FreePav { get; set; }
+        public Nullable<int> Rent { get; set; }
+        public Nullable<int> AllPavils { get; set; }
+        public Nullable<double> AreaSUM { get; set; }
+        public Nullable<double> AVGPRICEFORMETR { get; set; }
     }
 }
